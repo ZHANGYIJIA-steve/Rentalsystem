@@ -1,0 +1,40 @@
+<html>
+
+<head></head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="http://localhost:1337/rentalsystem/home">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/search">Search</a>
+                <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/create">Create</a>
+                <a class="nav-item nav-link active" href="#">Admin
+                    <span class="sr-only">(current)</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!--jumbotron-->
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Real Estate Rental System</h1>
+            <p class="lead">Real Estate Rental Management System is a web-based system to facilitate flatshare and finding roommates</p>
+        </div>
+    </div>
+    <table class="table">
+            <% rentalsystems.forEach( function(model) { %>
+                <tr><td><%=model.id%></td><td><%= model.Propertytitle%></td><td><%= model.Estate %></td><td><a  class="btn btn-link" href="http://localhost:1337/rentalsystem/edit/<%= model.id %>">Edit</a></td></tr>
+            <% }); %>
+            
+
+
+    </table>
+</body>
+
+</html>

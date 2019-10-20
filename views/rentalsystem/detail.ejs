@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="http://localhost:1337/rentalsystem/home">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/search">Search</a>
+                <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/create">Create</a>
+                <a class="nav-item nav-link active" href="#">Admin
+                    <span class="sr-only">(current)</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!--jumbotron-->
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Real Estate Rental System</h1>
+            <p class="lead">Real Estate Rental Management System is a web-based system to facilitate flatshare and finding roommates</p>
+        </div>
+    </div>
+
+    <div class="card col-md-12" style="height: 30rem;">
+            <h3 id='title' class='title'><%=model.Propertytitle%></h3>
+            
+            <dic class="row">
+                <div class="col-md-8">
+                    <img src="<%=model.image%>" class="card-img" width="600px" height="400px">
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <b>Estate:</b>
+                                <%=model.Estate%>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Gross Area:</b>
+                                <%=model.area%>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Rent: </b>
+                                <%=model.rent%>
+                            </li>
+                            <li class="list-group-item">
+                                    <b>Bedrooms: </b>
+                                    <%=model.Bedrooms%>
+                             </li>
+                             <li class="list-group-item">
+                                    <b>Expected Tenants</b>
+                                    <%=model.tenants%>
+                            </li>
+                            <li class="list-group-item">
+                                    <b>Created: </b>
+                                    <%=ct%>
+
+                            </li>
+                            <li class="list-group-item">
+                                    <b>Updated: </b>
+                                    <%=ut%>
+                                </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </dic>
+
+
+        </div>

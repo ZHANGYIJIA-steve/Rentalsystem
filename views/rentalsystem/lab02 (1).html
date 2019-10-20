@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lab #2</title>
+    <style>
+        .class3 {
+            background-color: lightsalmon
+        }
+    </style>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body onload="pageLoaded()">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="#">Features</a>
+                    <a class="nav-item nav-link" href="#">Pricing</a>
+                    <a class="nav-item nav-link disabled" href="#">Disabled</a>
+                </div>
+            </div>
+        </nav>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Fluid jumbotron</h1>
+                <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div id="div01" class="card col-12 col-sm-6 col-lg-4 col-xl-3"><button type="button"
+                    onclick="btn1Clicked(this)" class="btn btn-primary">I'm Button 1, Click me!</button></div>
+            <div id="div02" class="card col-12 col-sm-6 col-lg-4 col-xl-3"><button type="button"
+                    onclick="btn2Clicked(this)" class="btn btn-outline-danger">I'm Button 2, Click me!</button></div>
+            <div id="div03" class="card col-12 col-sm-6 col-lg-4 col-xl-3"><button type="button"
+                    onclick="btn3Clicked(this)" class="btn btn-outline-danger">I'm Button 3, Click me!</button></div>
+            <div id="div04" class="card col-12 col-sm-6 col-lg-4 col-xl-3"><img
+                class ="img-fluid img-thumbnail" src="http://via.placeholder.com/350x150/dec.png" /></div>
+            <div id="div05" class="card col-12 col-sm-6 col-lg-4 col-xl-3"></div>
+            <div id="div06" class="card col-12 col-sm-6 col-lg-4 col-xl-3"></div>
+            <div id="div07" class="card col-12 col-sm-6 col-lg-4 col-xl-3"></div>
+            <div id="div08" class="card col-12 col-sm-6 col-lg-4 col-xl-3"></div>
+            <div id="div09" class="card col-12 col-sm-6 col-lg-4 col-xl-3"></div>
+            <div id="div10" class="card col-12 col-sm-6 col-lg-4 col-xl-3"></div>
+            <div id="div11" class="card col-12 col-sm-6 col-lg-4 col-xl-3"></div>
+            <div id="div12" class="card col-12 col-sm-6 col-lg-4 col-xl-3"></div>
+        </div>
+    </div>
+    <script>
+        function btn1Clicked(elem) {
+            console.log("console output");
+            elem.innerHTML = "Don't click me!";
+        };
+        function btn2Clicked(elem) {
+            elem.style = "display:none";
+            elem.parentNode.innerHTML = "It's gone";
+        };
+        function btn3Clicked(elem) {
+            elem.parentNode.className += " class3";
+        };
+        function pageLoaded() {
+            runDiv5();
+            runDiv6();
+            runDiv7();
+            runDiv8();
+            runDiv9();
+            runDiv10();
+            runDiv11();
+            runDiv12();
+        }
+        function runDiv5() {
+
+            if (Math.random() > 0.5) {
+                document.getElementById("div05").innerHTML = "Upper";
+            } else {
+                document.getElementById("div05").innerHTML = "Lower";
+            }
+
+        }
+        function runDiv6() {
+
+            var div06 = document.getElementById("div06");
+
+            var booleanVariable = true;
+            var numericVariable = 12;
+            var stringVariable = "12";
+
+            div06.innerHTML = booleanVariable + ", " + numericVariable + ", " + stringVariable + "<br>";
+            div06.innerHTML += typeof booleanVariable + ", " + typeof numericVariable + ", " + typeof stringVariable + "<br>";
+
+            stringVariable = parseInt(stringVariable);
+
+            div06.innerHTML += stringVariable + ", " + typeof stringVariable + ", " + isNaN(stringVariable);
+
+        };
+        function runDiv7() {
+
+            var declaredAndAssigned = "Some value";
+
+            var declaredButNotAssigned;
+
+            document.getElementById("div07").innerHTML
+                = declaredAndAssigned + ", " + declaredButNotAssigned + "<br>";
+
+            document.getElementById("div07").innerHTML
+                += typeof declaredAndAssigned + ", " + typeof declaredButNotAssigned;
+
+        }
+        function runDiv8() {
+
+            var div08 = document.getElementById("div08");
+
+            var declaredAndAssigned = "Some value";
+
+            if (declaredAndAssigned) {
+                div08.innerHTML += declaredAndAssigned + "<br>";
+            }
+
+            var declaredButNotAssigned;
+
+            if (declaredButNotAssigned) {
+                div08.innerHTML += declaredAndNotAssigned + "<br>";
+            } // This is not displayed as `declaredButNotAssigned` is falsy.
+
+            var assigningFallbackValue = declaredButNotAssigned || "fallback";
+
+            div08.innerHTML += assigningFallbackValue + "<br>";
+
+        };
+        function runDiv9() {
+
+            for (i = 0; i < 10; i = i + 1) {
+
+                document.getElementById("div09").innerHTML += i + " ";
+
+            }
+
+        }
+        function runDiv10() {
+
+            var teamMembers = ["Martin", "Kenny", "Tony"];
+
+            // Object
+
+            var string = typeof (teamMembers) + "<br><ul class='list-group'>";
+
+
+            teamMembers.forEach(function (person) {
+
+                string += "<li class='list-group-item'>" + person + "</li>";
+            });
+
+            string += "</ul>"
+
+
+
+
+
+            document.getElementById("div10").innerHTML = string;
+
+        }
+        function runDiv11() {
+
+            var sukiyaki = { beef: "2 lb", eggs: 4, crucial: "pot" };
+
+            var string = "<table class='table table-striped table-hover table-bordered'>";
+
+            for (var key in sukiyaki) {
+                string += "<tr><td>" + key + "</td><td>" + sukiyaki[key] + "</td></tr>";
+            }
+
+            string += "</table>"
+
+            document.getElementById("div11").innerHTML = string;
+
+        }
+        function runDiv12() {
+
+            var str = "How are you doing today?";
+            var res = str.split(" ");
+            document.getElementById("div12").innerHTML = res[3]; // doing
+
+        }
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
