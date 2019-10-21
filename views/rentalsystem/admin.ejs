@@ -28,9 +28,11 @@
         </div>
     </div>
     <table class="table">
-            <% rentalsystems.forEach( function(model) { %>
-                <tr><td><%=model.id%></td><td><%= model.Propertytitle%></td><td><%= model.Estate %></td><td><a  class="btn btn-link" href="http://localhost:1337/rentalsystem/edit/<%= model.id %>">Edit</a></td></tr>
-            <% }); %>
+            <% for(var i=0;i < rentalsystems.length;i++){ %>
+               
+                <tr><td><%=i+1%></td><td><%= rentalsystems[i].Propertytitle%></td><td><%= rentalsystems[i].Estate %></td><td><a  class="btn btn-link" href="http://localhost:1337/rentalsystem/edit/<%= rentalsystems[i].id %>">Edit</a></td></tr>
+                
+            <% }; %>
             
 
 

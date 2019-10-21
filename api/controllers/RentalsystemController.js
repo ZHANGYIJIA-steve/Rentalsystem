@@ -41,6 +41,8 @@ delete: async function (req, res) {
     var models = await Rentalsystem.destroy(req.params.id).fetch();
 
     if (models.length == 0) return res.notFound();
+  
+
 
     return res.ok("Rentalsystem Deleted.");
 
@@ -69,7 +71,7 @@ edit: async function (req, res) {
             area: req.body.Rentalsystem.area,
             tenants: req.body.Rentalsystem.tenants,
             rent: req.body.Rentalsystem.rent,
-            high: req.body.Rentalsystem.high,
+            high: req.body.Rentalsystem.high ||"",
         }).fetch();
 
         if (models.length == 0) return res.notFound();
@@ -181,6 +183,7 @@ home: async function (req, res) {
 detail: async function (req, res) {
 
     var model = await Rentalsystem.findOne(req.params.id);
+  
 
     if (!model) return res.notFound();
     var ct= new Date().toLocaleDateString(model.createdAt);
