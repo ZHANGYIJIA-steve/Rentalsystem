@@ -16,6 +16,11 @@ module.exports.policies = {
   * (`true` allows public access)                                            *
   *                                                                          *
   ***************************************************************************/
+ RentalsystemController:{
+   creat:'isAdmin',
+   delete:'isAdmin',
+   edit:'isAdmin',
+ }
 
   // '*': true,
 

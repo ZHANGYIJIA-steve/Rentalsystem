@@ -26,6 +26,8 @@ module.exports.bootstrap = async function () {
   //   // etc.
   // ]);
   // ```
+  sails.bcrypt = require('bcryptjs');
+const saltRounds = 10;
   if (await Rentalsystem.count() > 0) {
     return ;
   }
@@ -39,5 +41,17 @@ module.exports.bootstrap = async function () {
     { Propertytitle: "沙田第一场豪华大房", image:"http://cms-bucket.nosdn.127.net/03164f48b729426cb531dfa5023aad3020180503185330.jpeg", Estate:"City One Shatin",Bedrooms:3,area:900,tenants:6,rent:29000,high:"" },
     // etc.
   ]);
+  if (await User.count() == 0) {
+    const hash = await sails.bcrypt.hash('123456', saltRounds);
+
+    await User.createEach([
+      { username: "Amy", password: hash,types:"admin"},
+      { username: "Mary", password: hash,types:"clients"},
+      {username:"Sam",password: hash,types:"everyone"},
+      // etc.
+    ]);
+
+}
+
 
 };

@@ -1,5 +1,5 @@
 /**
- * Rentalsystem.js
+ * User.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,45 +12,22 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-    Propertytitle:{
-      type:"string"
+    username: {
+      type: "string"
     },
-
-    image: {
-      type:"string"
-    },
-
-    Estate: {
-      type:"string"
-    },
-
-    Bedrooms: {
-      type: "number"
-    },
-
-    area: {
-      type: "number"
-    },
-
-    tenants: {
-      type: "number"
-    },
-
-    rent: {
-      type: "number"
-    },
-
-    high:{
-      type:"string"
-    },
-
-    rentBy:{
-      collection:'User',
-      via:'rent'
-    }
     
+    password: {
+      type: "string"
+    },
 
+    types:{
+      type:"string"
+    },
 
+    rent:{
+      collection: 'Rentalsystem',
+      via: 'rentBy'
+    },
 
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
@@ -61,7 +38,6 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    
 
   },
 
