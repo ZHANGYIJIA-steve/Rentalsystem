@@ -13,15 +13,19 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
     username: {
-      type: "string"
+      type: "string",
+      unique: true,
+      required: true
     },
     
     password: {
       type: "string"
     },
 
-    types:{
-      type:"string"
+    role:{
+      type:"string",
+      isIn: ['admin', 'clients', 'everyone'],
+      defaultsTo: 'everyone'
     },
 
     rent:{
