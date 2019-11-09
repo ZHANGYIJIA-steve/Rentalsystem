@@ -1,0 +1,168 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="http://localhost:1337/rentalsystem/home">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#">Search
+                <span class="sr-only">(current)</span>
+            </a>
+            <a class="nav-item nav-link " href="#">My Rentals</a>
+        </div>
+        <div class="navbar-nav">
+
+            <a class="nav-link my-2 my-sm-0 " href="#">hi (logout)</a>
+        </div>
+    </div>
+</nav>
+<!--jumbotron-->
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Real Estate Rental System</h1>
+        <p class="lead">Real Estate Rental Management System is a web-based system to facilitate flatshare and finding roommates</p>
+    </div>
+</div>
+<div class="row">
+    <% rentalsystems.forEach( function(model) { %>
+        <div class="card col-md-4" style="height: 23rem;">
+
+
+            <img src="<%=model.image%>" class="card-img-top" width=90px height=120px>
+            <a href="http://localhost:1337/rentalsystem/detail/<%=model.id%>" class="card-link">
+                <%=model.Propertytitle%>
+            </a>
+            <div class="card-body col-md-12">
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <b>Estate:</b>
+                            <%=model.Estate%>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Gross Area:</b>
+                            <%=model.area%>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Rent: </b>
+                            <%=model.rent%>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+            <% const current = parseInt(req.query.page) || 1; %>
+
+                <%const qEstate = req.query.Estate || "";%>
+                    <%const qBedrooms = parseInt(req.query.Bedrooms);%>
+                        <%const qMinArea = parseInt(req.query.MinArea)||0;%>
+                            <%const qMaxArea = parseInt(req.query.MaxArea)||99999999;%>
+                                <%const qMinRent = parseInt(req.query.MinRent)||0;%>
+                                    <%const qMaxRent = parseInt(req.query.MaxRent)||99999999;%>
+
+
+                                        <div class="form-col col-md-4">
+
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination">
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/rentalsystem/search?Estate=<%=qEstate%>&Bedrooms=<%=qBedrooms%>&MinArea=<%=qMinArea%>&MaxArea=<%=qMaxArea%>&MinRent=<%=qMinRent%>&MaxRent=<%qMaxRent%>&page=<%= Math.max(current-1, 1) %>">Previous</a>
+                                                    </li>
+
+                                                    <% for (i = 1; i <= count; i++) { %>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/rentalsystem/search?Estate=<%=qEstate%>&Bedrooms=<%=qBedrooms%>&MinArea=<%=qMinArea%>&MaxArea=<%=qMaxArea%>&MinRent=<%=qMinRent%>&MaxRent=<%=qMaxRent%>&page=<%= i %>">
+                                                                <%= i %>
+                                                            </a>
+                                                        </li>
+                                                        <% } %>
+
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="/rentalsystem/search?Estate=<%=qEstate%>&Bedrooms=<%=qBedrooms%>&MinArea=<%=qMinArea%>&MaxArea=<%=qMaxArea%>&MinRent=<%=qMinRent%>&MaxRent=<%=qMaxRent%>&page=<%= Math.min(current+1, count) %>">Next</a>
+                                                            </li>
+                                                </ul>
+                                            </nav>
+
+                                            <h3 id='title' class='title'>Property Search</h3>
+                                            <form action="/rentalsystem/search" method="GET">
+                                                <div class="form-inline">
+                                                    <div class="form-group">
+                                                        <div class="col-2">
+                                                            <label for="Estate">Estate:</label>
+                                                        </div>
+                                                        <div class="col-10">
+                                                            <select id="Estate" class="form-control col-12" name="Estate">
+                                                                <option selected>Select the Estate</option>
+                                                                <option>Festival City</option>
+                                                                <option>Tin Ma Court</option>
+                                                                <option>City One Shatin</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-inline">
+                                                    <div class="form-group">
+                                                        <div class="col-2">
+                                                            <label for="Bedrooms">Bedrooms: </label>
+                                                        </div>
+                                                        <div class="col-10">
+                                                            <input type="number" class="form-control col-12" id="Bedrooms" name="Bedrooms">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p>Area(Sq feet)</p>
+                                                <div class="form-inline">
+                                                    <div class="form-group">
+                                                        <div class="col-1">
+                                                            <label for="MinArea">Min: </label>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <input type="number" class="form-control col-12" id="MinArea" name="MinArea">
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <label for="MaxArea">Max: </label>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <input type="number" class="form-control col-12" id="MaxArea" name="MaxArea">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <p>Rent(HK$):</p>
+                                                <div class="form-inline">
+                                                    <div class="form-group">
+                                                        <div class="col-1">
+                                                            <label for="MinRent">Min: </label>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <input type="number" class="form-control col-12" id="MinRent" name="MinRent">
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <label for="MaxRent">Max: </label>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <input type="number" class="form-control col-12" id="MaxRent" name="MaxRent">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Search</button>
+
+
+
+
+
+
+
+
+                                            </form>
+                                        </div>
+
+</div>
+<script>
+    var c = document.getElementById("Estate");
+    var e = c.value;
+</script>

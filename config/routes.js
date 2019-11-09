@@ -28,6 +28,7 @@ module.exports.routes = {
  'GET /user/login': 'UserController.login',
 'POST /user/login': 'UserController.login',
 'POST /user/logout': 'UserController.logout',
+'GET /client/home': 'RentalsystemController.home',
  '/' : 'RentalsystemController.home',
   // '/': { view: 'rentalsystem/admin' },
 

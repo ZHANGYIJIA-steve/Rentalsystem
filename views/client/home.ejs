@@ -7,15 +7,14 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav mr-auto mt-2 mt-lg-0">
             <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/search">Search</a>
-            <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/create">Create</a>
-            <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/admin">Admin</a>
+            <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/create">My Rentals</a>
         </div>
-            <div class = "navbar-nav">
-               
-                    <a class="navbar-brand my-2 my-sm-0 "  href = "#">Login</a>
-            </div>
-            
-        
+        <div class="navbar-nav">
+
+            <a class="nav-link my-2 my-sm-0 " href="#">hi (logout)</a>
+        </div>
+
+
     </div>
 </nav>
 <!--jumbotron-->
@@ -28,7 +27,7 @@
 </div>
 <div class="row">
     <% rentalsystems.forEach( function(model) { %>
-        <div class="card col-md-6 col-sm-12" >
+        <div class="card col-md-6 col-sm-12">
             <a href="http://localhost:1337/rentalsystem/detail/<%=model.id%>" class="btn btn-link">
                 <%=model.Propertytitle%>
             </a>

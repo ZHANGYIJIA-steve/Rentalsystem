@@ -30,7 +30,7 @@
     <table class="table">
             <% for(var i=0;i < rentalsystems.length;i++){ %>
                
-                <tr><td><%=i+1%></td><td><%= rentalsystems[i].Propertytitle%></td><td><%= rentalsystems[i].Estate %></td><td><a  class="btn btn-link" href="http://localhost:1337/rentalsystem/edit/<%= rentalsystems[i].id %>">Edit</a></td></tr>
+                <tr><td><%=i+1%></td><td><a  class="btn btn-link" href="http://localhost:1337/rentalsystem/detail/<%=rentalsystems[i].id%>"><%= rentalsystems[i].Propertytitle%></a></td><td><%= rentalsystems[i].Estate %></td><td><a  class="btn btn-link" href="#">Occupants</a></td><td><a  class="btn btn-link" href="http://localhost:1337/rentalsystem/edit/<%= rentalsystems[i].id %>">Edit</a></td><td><button type = "button"class = "btn btn-danger" onclick="deleteHouse('<%=rentalsystems[i].id%>')">Delete</button></td></tr>
                 
             <% }; %>
             
@@ -38,5 +38,28 @@
 
     </table>
 </body>
+<script>
+
+        async function deleteHouse(id) {
+    
+            var r = confirm("Confirm Delete?");
+           
+            if (r) {
+    
+                var response = await fetch("/rentalsystem/delete/" + id, {
+                    method: "POST",
+                    credentials: 'same-origin',
+                });
+    
+                var html = await response.text();
+                alert(html);
+    
+            } else {
+                alert("cancelled");
+            }
+    
+        };
+    
+</script>
 
 </html>

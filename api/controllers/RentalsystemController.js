@@ -177,7 +177,11 @@ home: async function (req, res) {
         sort: 'createdAt'
 
     });
+    if(req.session.role=='client'){
+        return res.view('client/home', { rentalsystems: models });
+    }else
     return res.view('rentalsystem/home', { rentalsystems: models });
+
     
 },
 detail: async function (req, res) {

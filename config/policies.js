@@ -18,8 +18,9 @@ module.exports.policies = {
   ***************************************************************************/
  RentalsystemController:{
    creat:'isAdmin',
-   delete:'isAdmin',
-   edit:'isAdmin',
+   //delete:'isAdmin',
+   //edit:'isAdmin',
+  
  }
 
   // '*': true,
