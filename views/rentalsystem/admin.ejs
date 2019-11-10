@@ -10,12 +10,16 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
+            <div class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/search">Search</a>
                 <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/create">Create</a>
                 <a class="nav-item nav-link active" href="#">Admin
                     <span class="sr-only">(current)</span>
                 </a>
+            </div>
+            <div class="navbar-nav">
+
+                    <a class="navbar-brand my-2 my-sm-0 "href="javascript:logout()">hi <%=session.username%>(logout)</a>
             </div>
         </div>
     </nav>
@@ -28,31 +32,85 @@
         </div>
     </div>
     <table class="table">
-            <% for(var i=0;i < rentalsystems.length;i++){ %>
-               
-                <tr><td><%=i+1%></td><td><a  class="btn btn-link" href="http://localhost:1337/rentalsystem/detail/<%=rentalsystems[i].id%>"><%= rentalsystems[i].Propertytitle%></a></td><td><%= rentalsystems[i].Estate %></td><td><a  class="btn btn-link" href="#">Occupants</a></td><td><a  class="btn btn-link" href="http://localhost:1337/rentalsystem/edit/<%= rentalsystems[i].id %>">Edit</a></td><td><button type = "button"class = "btn btn-danger" onclick="deleteHouse('<%=rentalsystems[i].id%>')">Delete</button></td></tr>
-                
+        <% for(var i=0;i < rentalsystems.length;i++){ %>
+
+            <tr>
+                <td>
+                    <%=i+1%>
+                </td>
+                <td>
+                    <a class="btn btn-link" href="http://localhost:1337/rentalsystem/detail/<%=rentalsystems[i].id%>">
+                        <%= rentalsystems[i].Propertytitle%>
+                    </a>
+                </td>
+                <td>
+                    <%= rentalsystems[i].Estate %>
+                </td>
+                <td>
+                    <a class="btn btn-link" href="#">Occupants</a>
+                </td>
+                <td>
+                    <a class="btn btn-link" href="http://localhost:1337/rentalsystem/edit/<%= rentalsystems[i].id %>">Edit</a>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" onclick="deleteHouse('<%=rentalsystems[i].id%>')">Delete</button>
+                </td>
+            </tr>
+
             <% }; %>
-            
+
 
 
     </table>
 </body>
 <script>
 
-        async function deleteHouse(id) {
+    async function deleteHouse(id) {
+
+        var r = confirm("Confirm Delete?");
+
+        if (r) {
+
+            var response = await fetch("/rentalsystem/delete/" + id, {
+                method: "POST",
+                credentials: 'same-origin',
+            });
+
+            if (response.ok) {
+                var data = await response.json();
+                alert(data.message);
+                window.location = data.url;
+            } else {
+                alert(response.status + ": " + response.statusText);
+            }
+
+        } else {
+            alert("cancelled");
+        }
+
+    };
+
+</script>
+<script>
+
+        async function logout() {
     
-            var r = confirm("Confirm Delete?");
-           
+            var r = confirm("Confirm logout?");
+    
             if (r) {
     
-                var response = await fetch("/rentalsystem/delete/" + id, {
+                var response = await fetch("/user/logout/",{
                     method: "POST",
                     credentials: 'same-origin',
                 });
     
-                var html = await response.text();
-                alert(html);
+                if (response.ok) {
+                    var data = await response.json();
+                    alert(data.message);
+                    window.location = data.url;
+                } else {
+                    alert(response.status + ": " + response.statusText);
+                }
     
             } else {
                 alert("cancelled");
@@ -60,6 +118,6 @@
     
         };
     
-</script>
+    </script>
 
 </html>

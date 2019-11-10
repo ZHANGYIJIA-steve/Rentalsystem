@@ -25,10 +25,16 @@ module.exports = {
             if (err) return res.serverError(err);
 
             req.session.username = req.body.username;
+            req.session.role=user.role;
 
             sails.log("[Session] ", req.session);
+            if (req.wantsJSON) {
+                return res.json({ message: "login successfully.", url: '/rentalsystem/home' });    // for ajax request
+            } else {
+                return res.redirect('/rentalsystem/home');           // for normal request
+            }
 
-            return res.ok("Login successfully.");
+          
 
         });
 
@@ -38,10 +44,42 @@ module.exports = {
         req.session.destroy(function (err) {
 
             if (err) return res.serverError(err);
+            if (req.wantsJSON) {
+                return res.json({ message: "logout successfully.", url: '/rentalsystem/home' });    // for ajax request
+            } else {
+                return res.redirect('/rentalsystem/home');           // for normal request
+            }
 
-            return res.ok("Log out successfully.");
+           
+            
+           
 
         });
+    },
+    populate: async function (req, res) {
+
+        var model = await User.findOne(req.params.id).populate("rent");
+    
+        if (!model) return res.notFound();
+    
+        return res.json(model);
+    
+    },
+    add: async function (req, res) {
+
+        if (!await User.findOne(req.params.id)) return res.notFound();
+        
+        const thatHouse = await Rentalsystem.findOne(req.params.fk).populate("rentBy", {id: req.params.id});
+    
+        if (!thatHouse) return res.notFound();
+            
+        if (thatHouse.rentBy.length)
+            return res.status(409).send("Already added.");   // conflict
+        
+        await User.addToCollection(req.params.id, "rent").members(req.params.fk);
+    
+        return res.ok('Operation completed.');
+    
     },
 
 };

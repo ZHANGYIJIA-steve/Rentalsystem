@@ -6,11 +6,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/search">Search</a>
-                <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/create">Create</a>
-                <a class="nav-item nav-link active" href="http://localhost:1337/rentalsystem/admin">Admin
-                    <span class="sr-only">(current)</span>
-                </a>
+                    <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/search">Search</a>
+                    <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/create">My Rentals</a>
             </div>
             <div class="navbar-nav">
 
@@ -30,7 +27,7 @@
     <div class="card col-md-12" style="height: 30rem;">
             <h3 id='title' class='title'><%=model.Propertytitle%></h3>
             
-            <dic class="row">
+            <div class="row">
                 <div class="col-md-8">
                     <img src="<%=model.image%>" class="card-img" width="600px" height="400px">
                 </div>
@@ -68,9 +65,11 @@
                                 </li>
                         </ul>
                     </div>
+                    <button id="button1" type="button" class="btn btn-primary"onclick="rent('<%= model.id %>')">rent</button>
 
                 </div>
-            </dic>
+               
+            </div>
 
 
         </div>
@@ -102,3 +101,31 @@
                 };
             
             </script>
+             <script>
+
+                    async function rent(id) {
+                
+                        var r = confirm("Confirm rent?");
+                
+                        if (r) {
+                
+                            var response = await fetch("/user/logout/",{
+                                method: "POST",
+                                credentials: 'same-origin',
+                            });
+                
+                            if (response.ok) {
+                                var data = await response.json();
+                                alert(data.message);
+                                window.location = data.url;
+                            } else {
+                                alert(response.status + ": " + response.statusText);
+                            }
+                
+                        } else {
+                            alert("cancelled");
+                        }
+                
+                    };
+                
+                </script>

@@ -45,13 +45,21 @@ const saltRounds = 10;
     const hash = await sails.bcrypt.hash('123456', saltRounds);
 
     await User.createEach([
-      { username: "Amy", password: hash,types:"admin"},
-      { username: "Mary", password: hash,types:"clients"},
-      {username:"Sam",password: hash,types:"everyone"},
+      { username: "Amy", password: hash,role:"admin"},
+      { username: "Mary", password: hash,role:"clients"},
+      {username:"Sam",password: hash,role:"everyone"},
       // etc.
     ]);
 
+
 }
+const martin = await Rentalsystem.findOne({Propertytitle: "酒店式靓装，有泳池会所"});
+const kenny = await Rentalsystem.findOne({Propertytitle: "沙田第一城 套三房刚翻新"});
+const Mary = await User.findOne({username: "Mary"});
+
+await User.addToCollection(Mary.id, 'rent').members(kenny.id);
+await User.addToCollection(Mary.id, 'rent').members([martin.id, kenny.id]);
+return;
 
 
 };

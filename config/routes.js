@@ -28,7 +28,11 @@ module.exports.routes = {
  'GET /user/login': 'UserController.login',
 'POST /user/login': 'UserController.login',
 'POST /user/logout': 'UserController.logout',
-'GET /client/home': 'RentalsystemController.home',
+'GET /rentalsystem/:id/rentBy': 'RentalsystemController.populate',
+'GET /user/:id/rent': 'UserController.populate',
+'POST /user/:id/rent/add/:fk': 'UserController.add',
+'POST /user/:id/rent/remove/:fk': 'UserController.remove',
+
  '/' : 'RentalsystemController.home',
   // '/': { view: 'rentalsystem/admin' },
 

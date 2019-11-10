@@ -10,10 +10,10 @@
             <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/create">Create</a>
             <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/admin">Admin</a>
         </div>
-            <div class = "navbar-nav">
-               
-                    <a class="navbar-brand my-2 my-sm-0 "  href = "#">Login</a>
-            </div>
+        <div class="navbar-nav">
+
+                <a class="navbar-brand my-2 my-sm-0 "href="javascript:logout()">hi <%=session.username%>(logout)</a>
+        </div>
             
         
     </div>
@@ -61,3 +61,31 @@
         </div>
         <% }); %>
 </div>
+<script>
+
+        async function logout() {
+    
+            var r = confirm("Confirm logout?");
+    
+            if (r) {
+    
+                var response = await fetch("/user/logout/",{
+                    method: "POST",
+                    credentials: 'same-origin',
+                });
+    
+                if (response.ok) {
+                    var data = await response.json();
+                    alert(data.message);
+                    window.location = data.url;
+                } else {
+                    alert(response.status + ": " + response.statusText);
+                }
+    
+            } else {
+                alert("cancelled");
+            }
+    
+        };
+    
+    </script>

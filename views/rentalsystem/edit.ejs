@@ -21,10 +21,14 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
+            <div class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/search">Search</a>
                 <a class="nav-item nav-link " href="http://localhost:1337/rentalsystem/create">Create</a>
                 <a class="nav-item nav-link active" href="http://localhost:1337/rentalsystem/admin">Admin<span class="sr-only">(current)</span></a>
+            </div>
+            <div class="navbar-nav">
+
+                    <a class="navbar-brand my-2 my-sm-0 "href="javascript:logout()">hi <%=session.username%>(logout)</a>
             </div>
         </div>
     </nav>
@@ -91,14 +95,14 @@
                     <label class="form-check-label" for="high">Highlighted Property</label>
                     <br>
                     <br>
-                    <button type="submit" class="btn btn-primary">submit</button>
+                    <button type="submit" class="btn btn-primary"onclick="updateHouse('<%=rentalsystem.id%>')">submit</button>
                 </div>
             </div>
            
     </form>
-    <form action ="/rentalsystem/delete/<%=rentalsystem.id%>" method="POST">
-        <button type="submit" class="btn btn-danger">Detele</button>
-    </form>  
+   
+   
+   
             
     
 
@@ -112,7 +116,6 @@
         crossorigin="anonymous"></script>
     <script>
         if("<%=rentalsystem.high%>"=="highlighted"){
-            console.log('asdad');
         var a =document.getElementById("high");
         a.checked =true;
         }
@@ -120,4 +123,33 @@
 
 
     </script>
+    <script>
+
+            async function logout() {
+        
+                var r = confirm("Confirm logout?");
+        
+                if (r) {
+        
+                    var response = await fetch("/user/logout/",{
+                        method: "POST",
+                        credentials: 'same-origin',
+                    });
+        
+                    if (response.ok) {
+                        var data = await response.json();
+                        alert(data.message);
+                        window.location = data.url;
+                    } else {
+                        alert(response.status + ": " + response.statusText);
+                    }
+        
+                } else {
+                    alert("cancelled");
+                }
+        
+            };
+        
+        </script>
+ 
 </body>
