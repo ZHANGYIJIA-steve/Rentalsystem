@@ -26,6 +26,7 @@ module.exports = {
 
             req.session.username = req.body.username;
             req.session.role=user.role;
+            req.session.userid=user.id;
 
             sails.log("[Session] ", req.session);
             if (req.wantsJSON) {
@@ -67,20 +68,50 @@ module.exports = {
     },
     add: async function (req, res) {
 
-        if (!await User.findOne(req.params.id)) return res.notFound();
         
-        const thatHouse = await Rentalsystem.findOne(req.params.fk).populate("rentBy", {id: req.params.id});
+        const house = await Rentalsystem.findOne(req.params.fk);
+       
+        
+        const thatHouse = await Rentalsystem.findOne({id:req.params.fk}).populate("rentBy");
+
     
         if (!thatHouse) return res.notFound();
             
-        if (thatHouse.rentBy.length)
-            return res.status(409).send("Already added.");   // conflict
+        if (thatHouse.rentBy.length>=thatHouse.tenants)
+            return res.status(409).send("full rent.");   // conflict
         
-        await User.addToCollection(req.params.id, "rent").members(req.params.fk);
+        await User.addToCollection(user.id, "rent").members(req.params.fk);
+        if (req.wantsJSON) {
+            return res.json({ message: "rent successfully.", url: '/rentalsystem/detail/'+req.params.fk });    // for ajax request
+        } else {
+            return res.redirect('/rentalsystem/detail/'+req.params.fk);           // for normal request
+        }
     
-        return res.ok('Operation completed.');
+       
     
     },
+    remove: async function (req, res) {
+
+        const user = await User.findOne({username:req.session.username})
+        
+        const thatHouse = await Rentalsystem.findOne(req.params.fk).populate("rentBy", {id: user.id});
+        
+        
+        if (!thatHouse) return res.notFound();
+    
+        if (!thatHouse.rentBy.length)
+            return res.status(409).send("Nothing to delete.");    // conflict
+    
+        await User.removeFromCollection(user.id, "rent").members(req.params.fk);
+    
+        if (req.wantsJSON) {
+            return res.json({ message: "rent successfully.", url: '/rentalsystem/detail/'+req.params.fk });    // for ajax request
+        } else {
+            return res.redirect('/rentalsystem/detail/'+req.params.fk);           // for normal request
+        }
+    
+    },
+    
 
 };
 

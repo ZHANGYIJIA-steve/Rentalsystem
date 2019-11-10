@@ -47,7 +47,7 @@ const saltRounds = 10;
     await User.createEach([
       { username: "Amy", password: hash,role:"admin"},
       { username: "Mary", password: hash,role:"clients"},
-      {username:"Sam",password: hash,role:"everyone"},
+      {username:"Sam",password: hash,role:"clients"},
       // etc.
     ]);
 

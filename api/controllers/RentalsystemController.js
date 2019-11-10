@@ -193,6 +193,7 @@ module.exports = {
             sort: 'createdAt'
 
         });
+        
         if (req.session.role == 'clients') {
             return res.view('client/home', { rentalsystems: models });
         }else if(req.session.role=='admin'){
@@ -206,13 +207,22 @@ module.exports = {
     detail: async function (req, res) {
 
         var model = await Rentalsystem.findOne(req.params.id);
+        
+
 
 
         if (!model) return res.notFound();
         var ct = new Date().toLocaleDateString(model.createdAt);
         var ut = new Date().toLocaleDateString(model.updatedAt);
         if (req.session.role == 'clients') {
-            return res.view('client/detail', { model: model, ct, ut });
+            const user = await User.findOne({username:req.session.username})
+            const thatHouse = await Rentalsystem.findOne({id:req.params.id}).populate("rentBy", {id: user.id});
+            if(thatHouse.rentBy.length){
+                 return res.view('client/detail2', { model: model, ct, ut });
+            }else{
+                return res.view('client/detail', { model: model, ct, ut });
+            }
+
         }else if(req.session.role=='admin'){
             return res.view('rentalsystem/detail', { model: model, ct, ut });
         }else
@@ -231,6 +241,19 @@ module.exports = {
         return res.json(model);
     
     },
+    Myrental: async function (req, res) {
+
+        var model = await User.findOne(req.session.userid).populate("rent");
+        return res.view('client/Myrental', { rentalsystems: model.rent });
+
+    },
+    occupant: async function (req, res) {
+
+        var model = await Rentalsystem.findOne(req.params.id).populate("rentBy");
+        return res.view('rentalsystem/occupant', { rentalsystems: model.rentBy });
+
+    },
+
 
 
 

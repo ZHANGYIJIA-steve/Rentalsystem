@@ -65,7 +65,7 @@
                                 </li>
                         </ul>
                     </div>
-                    <button id="button1" type="button" class="btn btn-primary"onclick="rent('<%= model.id %>')">rent</button>
+                    <button id="button1" type="button" class="btn btn-danger"onclick="moveout('<%= model.id %>')">Move out</button>
 
                 </div>
                
@@ -103,9 +103,9 @@
             </script>
              <script>
 
-                    async function rent(id) {
+                    async function moveout(id) {
                 
-                        var r = confirm("Confirm rent?");
+                        var r = confirm("Confirm move out?");
                        
                 
                         if (r) {
@@ -113,7 +113,7 @@
                            
                           
                 
-                            var response = await fetch("/user/rent/add/"+id,{
+                            var response = await fetch("/user/rent/remove/"+id,{
                                 method: "POST",
                                 credentials: 'same-origin',
                             });
