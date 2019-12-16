@@ -26,8 +26,10 @@ module.exports = {
     json: async function (req, res) {
 
         var rentalsystems = await Rentalsystem.find();
+        
 
         return res.json(rentalsystems);
+        
     },
     admin: async function (req, res) {
 
@@ -195,11 +197,19 @@ module.exports = {
         });
         
         if (req.session.role == 'clients') {
+            if(res.wantsJSON)
+            {
+                return res.json(models);
+            }
             return res.view('client/home', { rentalsystems: models });
         }else if(req.session.role=='admin'){
             return res.view('rentalsystem/home', { rentalsystems: models });
-        }else
-            return res.view('everyone/home', { rentalsystems: models });
+    }else{
+        if(res.wantsJSON)
+        {
+            return res.json(models);
+        }
+            return res.view('everyone/home', { rentalsystems: models });}
         
 
 

@@ -21,6 +21,7 @@ module.exports.routes = {
  'GET /rentalsystem/edit/:id': 'RentalsystemController.edit',
  'GET /rentalsystem/detail/:id': 'RentalsystemController.detail',
  'GET /rentalsystem/admin/': 'RentalsystemController.admin',
+ 'GET /rentalsystem/json/': 'RentalsystemController.json',
  'GET /rentalsystem/create/': 'RentalsystemController.create',
  'GET /rentalsystem/search': 'RentalsystemController.search',
  'POST /rentalsystem/delete/:id': 'RentalsystemController.delete',
